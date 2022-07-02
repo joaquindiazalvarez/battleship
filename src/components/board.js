@@ -4,19 +4,41 @@ import { Tags } from './tags'
 import battleship from '../img/battleship.png'
 
 export function Board(){
+    let defaultMatrix = []
+    for(var i = 0; i < 10; i++){
+        defaultMatrix.push([])
+        for(let j = 0; j < 10; j++){
+            defaultMatrix[i].push({clicked: false, ship: false})
+        }
+    }
     const tags = [[1,2,3,4,5,6,7,8,9,10],["A","B","C","D","E","F","G","H","I","J"]];
-    const [matrix, setMatrix] = useState([])
+    const [matrix, setMatrix] = useState([...defaultMatrix])
     useEffect(()=>{
-        let defaultMatrix = []
+/*         let defaultMatrix = []
         for(var i = 0; i < 10; i++){
             defaultMatrix.push([])
             for(let j = 0; j < 10; j++){
                 defaultMatrix[i].push({clicked: false, ship: false})
             }
-        }
+        } */
         setMatrix([...defaultMatrix])
+    /*     const start = false; */
+        createAndRandomizeShips();
 
     },[])
+ /*    useEffect(()=>{
+        if(start)
+    },[matrix]) */
+    function createAndRandomizeShips(){
+        let cmatrix = matrix;
+        for(let i = 0; i < 25; i++){
+            let rand = [Math.floor(Math.random()*10), Math.floor(Math.random()*10)]
+            let ship = {clicked: true, ship: true}
+            cmatrix = [...cmatrix.slice(0, rand[0]), [...cmatrix[rand[0]].slice(0, rand[1]), {...ship, clicked: true, ship: true}, ...cmatrix[rand[0]].slice(rand[1]+1)], ...cmatrix.slice(rand[0]+1)]
+           }
+        setMatrix([...cmatrix])
+
+    }
     console.log(matrix)
     return(<div id="board" className="mt-5">
         <div className="container">
