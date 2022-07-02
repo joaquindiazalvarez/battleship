@@ -2,8 +2,10 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 5vmin;
+.App-logo, .App-battleship {
+  height: 7vmin;
+  width: 7vmin;
+
   pointer-events: none;
 }
 

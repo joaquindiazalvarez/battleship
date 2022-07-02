@@ -2,13 +2,14 @@ import logo from './img/logo.svg';
 import './App.css';
 import { Footer } from './components/footer';
 import { Navbar } from './components/navbar';
+import { Board } from './components/board'
 
 function App() {
   return (
     <div className="App">
       <div className="container-fluid position-fixed">
         <Navbar/>
-        <header className="App-header">
+{/*          <header className="App-header">
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
@@ -20,7 +21,8 @@ function App() {
           >
             Learn React
           </a>
-        </header>
+        </header>  */}
+        <Board/>
         <Footer/>
       </div>
     </div>

@@ -13,11 +13,55 @@ code {
     monospace;
 }
 
-nav{
+/*the code below was written by Joaquín Díaz*/
+
+
+#navbardiv nav div{
+  /*center div*/
+  width: fit-content;
+  margin: 0 auto;
   color: white;
   font-size: 30px;
 }
-#navbardiv nav div{
-  width: fit-content;
-  margin: 0 auto;
+#board{
+  display: flex;
+}
+#board .container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#board div div{
+  /*first matrix map parent div*/
+  display: block;
+  line-height: 40px;
+  border: 1px solid black
+}
+#board div div div{
+  /*second matrix map parent*/
+  display: flex;
+  line-height: 40px;
+  border: 1px solid black
+}
+.rowsTags{
+  display:block;
+}
+.rowTag{
+  background: gray;
+}
+.space{
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  background: white;
+  border-radius: 30%;
+}
+.clicked.ship{
+  background: red;
+}
+.clicked.void{
+  background: yellow;
+}
+.unclicked{
+  background: white;
 }
