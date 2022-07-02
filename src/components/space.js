@@ -1,18 +1,9 @@
 import React from 'react';
 
 export function Space(props){
+    //espacio que cambia de color y de modo
+    //según los props que reciba
     return(<>
-        {props.clicked === true && props.ship === true && (<div
-            className="space clicked ship">
-        </div>)}
-        {props.clicked === true && props.ship === false && (<div
-            className="space clicked void">
-        </div>)}
-        {props.clicked === false && props.ship === true && (<div
-            className="space unclicked ship">
-        </div>)}
-        {props.clicked === false && props.ship === false && (<div
-            className="space unclicked void">
-        </div>)}
+        <div className={"space " + (props.clicked === true ? "clicked ":'') + (props.ship === true ? "ship ": '') + (props.show === true ? "show": '')}></div>
     </>)
 }

@@ -23,9 +23,7 @@ code {
   color: white;
   font-size: 30px;
 }
-#board{
-  display: flex;
-}
+
 #board .container{
   display: flex;
   justify-content: center;
@@ -69,14 +67,14 @@ code {
   background: white;
   border-radius: 30%;
 }
+.clicked{
+  background: blue;
+}
 .clicked.ship{
   background: red;
 }
-.clicked.void{
-  background: yellow;
-}
-.unclicked{
-  background: white;
+.show.ship{
+  background: orange;
 }
 img{
   border-radius: 30%;
