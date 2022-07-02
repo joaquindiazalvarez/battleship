@@ -51,6 +51,7 @@ code {
   background: gray;
   border-radius: 30%;
   width: 40px;
+  height: 40px;
   justify-content:center;
   align-items: center;
 }

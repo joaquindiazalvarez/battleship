@@ -42,7 +42,7 @@ export function Board(){
     console.log(matrix)
     return(<div id="board" className="mt-5">
         <div className="container">
-            <div className="rowsTags mt-3">
+            <div className="rowsTags">
             <img src={battleship} className="App-battleship" alt="battleship"/>
             {tags[0].map((element, index)=>{return(<div key={index}>
                     <Tags orientation="row" tag={element}/>
