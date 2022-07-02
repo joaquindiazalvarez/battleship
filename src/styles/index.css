@@ -47,7 +47,19 @@ code {
   display:block;
 }
 .rowTag{
+  display: flex;
   background: gray;
+  border-radius: 30%;
+  width: 40px;
+  justify-content:center;
+  align-items: center;
+}
+.columnTag{
+  background: gray;
+  border-radius: 30%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 .space{
   width: 40px;
@@ -64,4 +76,7 @@ code {
 }
 .unclicked{
   background: white;
+}
+img{
+  border-radius: 30%;
 }

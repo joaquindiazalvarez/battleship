@@ -30,19 +30,19 @@ export function Board(){
         if(start)
     },[matrix]) */
     function createAndRandomizeShips(){
-        let cmatrix = matrix;
+        let rmatrix = matrix;
         for(let i = 0; i < 25; i++){
             let rand = [Math.floor(Math.random()*10), Math.floor(Math.random()*10)]
             let ship = {clicked: true, ship: true}
-            cmatrix = [...cmatrix.slice(0, rand[0]), [...cmatrix[rand[0]].slice(0, rand[1]), {...ship, clicked: true, ship: true}, ...cmatrix[rand[0]].slice(rand[1]+1)], ...cmatrix.slice(rand[0]+1)]
+            rmatrix = [...rmatrix.slice(0, rand[0]), [...rmatrix[rand[0]].slice(0, rand[1]), {...ship, clicked: true, ship: true}, ...rmatrix[rand[0]].slice(rand[1]+1)], ...rmatrix.slice(rand[0]+1)]
            }
-        setMatrix([...cmatrix])
+        setMatrix([...rmatrix])
 
     }
     console.log(matrix)
     return(<div id="board" className="mt-5">
         <div className="container">
-            <div className="rowsTags">
+            <div className="rowsTags mt-3">
             <img src={battleship} className="App-battleship" alt="battleship"/>
             {tags[0].map((element, index)=>{return(<div key={index}>
                     <Tags orientation="row" tag={element}/>
