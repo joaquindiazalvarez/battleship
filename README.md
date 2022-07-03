@@ -3,7 +3,10 @@
 you must place ships an then star to fire with clicks!
 ## How to run app
 if you are using gitpod it will run automatically,
-however, if you are in VScode locally, you must install npm:
+however, if you are in VScode locally,
+first you must enter to the app folder:
+### `cd battleship`
+then you must install npm:
 ### `npm install`
 and then run it:
 ### `npm start`
