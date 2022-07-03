@@ -70,12 +70,15 @@ code {
 .clicked{
   background: blue;
 }
-.clicked.ship{
-  background: red;
-}
 .show.ship{
   background: orange;
 }
+.clicked.ship{
+  background: red;
+}
 img{
   border-radius: 30%;
+}
+#counter{
+  color: white;
 }
