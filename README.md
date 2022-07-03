@@ -1,4 +1,6 @@
 ![plot](./battleship.png)
+##The Game
+you must place ships an then star to fire with clicks!
 ## How to run app
 if you are using gitpod it will run automatically,
 however, if you are in VScode locally, you must install npm:
