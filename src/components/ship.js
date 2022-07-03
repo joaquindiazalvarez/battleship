@@ -1,6 +1,9 @@
 import React from 'react';
 
 export function Ship(props){
+    //esta función renderiza un barco 
+    //en forma horizontal o vertical
+    //dependiendo del prop que reciba
     const arr = []
     for(let i = 0; i < props.len; i++){
         arr.push(i);

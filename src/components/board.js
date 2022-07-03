@@ -9,6 +9,7 @@ export function Board(){
     //donde ocurre el juego
     let defaultMatrix = []
     for(let i = 0; i < 10; i++){
+        //se crea una matrix vacía
         defaultMatrix.push([]);
         for(let j = 0; j < 10; j++){
             defaultMatrix[i].push({clicked: false, ship: false});
@@ -16,12 +17,14 @@ export function Board(){
     }
     let shipsArray = []
     for(let i = 3; i >= 1; i--){
+        //se crea el arreglo de barcos que van a posicionarse
+        //en el tablero
         shipsArray.push({len: i, orientation: 'horizontal', coordinateds: []});
         shipsArray.push({len: i, orientation: 'vertical', coordinateds: []});
         if(i === 1) shipsArray.pop()
     }
     console.log(shipsArray)
-    const tags = [[1,2,3,4,5,6,7,8,9,10],["A","B","C","D","E","F","G","H","I","J"]];
+    const tags = [[1,2,3,4,5,6,7,8,9,10],["A","B","C","D","E","F","G","H","I","J"]];//etiquetas del tablero
     const [showShips, setShowShips] = useState(true);
     const [counter, setCounter] = useState(11);
     const [matrix, setMatrix] = useState([...defaultMatrix]);
@@ -31,22 +34,22 @@ export function Board(){
     const [ships, updateShips] = useState(shipsArray)
     useEffect(()=>{
         setMatrix([...defaultMatrix])
-        //createAndRandomizeShips();
     },[])
     function createAndRandomizeShips(){
         //Cambia 25 veces(o menos) un espacio vacío a un espacio ocupado
         //por un barco aleatoriamente.
-        let rmatrix = [...defaultMatrix]
+        //esta función la usé para iniciar un juego random en un principio
+        let randomMatrix = [...defaultMatrix]
         //r de random
         let counterHelper = 0;
         for(let i = 0; i < 4; i++){
             let rand = [Math.floor(Math.random()*10), Math.floor(Math.random()*10)];
-            if(rmatrix[rand[0]][rand[1]].ship === false) counterHelper = counterHelper + 1;
+            if(randomMatrix[rand[0]][rand[1]].ship === false) counterHelper = counterHelper + 1;
             let defaultShip = {clicked: false, ship: true}
-            rmatrix = [...rmatrix.slice(0, rand[0]), [...rmatrix[rand[0]].slice(0, rand[1]), defaultShip, ...rmatrix[rand[0]].slice(rand[1]+1)], ...rmatrix.slice(rand[0]+1)]
+            randomMatrix = [...randomMatrix.slice(0, rand[0]), [...randomMatrix[rand[0]].slice(0, rand[1]), defaultShip, ...randomMatrix[rand[0]].slice(rand[1]+1)], ...randomMatrix.slice(rand[0]+1)]
             
         }
-        setMatrix([...rmatrix])
+        setMatrix([...randomMatrix])
         setCounter(counterHelper)
 
     }
@@ -64,37 +67,65 @@ export function Board(){
         }
     }
     function handleClickPlacing(c){
-        //setea los ships en el modo placing
+        //sirve para ir seteando los barcos en
+        //su respectivo lugar uno a uno
             let obj = {...ships[placingCounter]}
             let shipHelper = [...ships]
             if(matrix[c[0]][c[1]].ship === false){
             if(obj.orientation === 'horizontal' && obj.coordinateds.length < obj.len){
                 if(obj.coordinateds.length === 0){
-                    setMatrix([...matrix.slice(0, c[0]), [...matrix[c[0]].slice(0, c[1]), {...matrix[c[0]][c[1]], ship: true}, ...matrix[c[0]].slice(c[1]+1)], ...matrix.slice(c[0]+1)])
-                    //updateShips([...ships.slice(0, placingCounter),{...ships[placingCounter], coordinateds: [...ships[placingCounter].coordinateds, [c[0], c[1]]]},ships.slice(placingCounter + 1)])
-                    shipHelper[placingCounter].coordinateds = [...ships[placingCounter].coordinateds, [c[0], c[1]]];
-                    updateShips([...shipHelper]);
+                    //si la orientación es horizontal, y no se han 
+                    //posicionado partes de un barco, entonces
+                    //se puede posicionar la primera parte de un barco
+                    if(!((c[0] === 0 && matrix[1][c[1]].ship === true) || (c[0] === 9 && matrix[8][c[1]].ship === true)) || obj.len === 1){
+                        //este es el if más interno y en resumidas
+                        //cuentas el código sirve para descartar
+                        //las situaciones en que no se puede posicionar 
+                        //un barco debido a que no hay suficiente espacio
+                        //para posicionar el barco completo
+                        setMatrix([...matrix.slice(0, c[0]), [...matrix[c[0]].slice(0, c[1]), {...matrix[c[0]][c[1]], ship: true}, ...matrix[c[0]].slice(c[1]+1)], ...matrix.slice(c[0]+1)])
+                        //este setState sirve para cambiar un elemento de la matrix
+                        //en este caso se posiciona una parte del barco
+                        shipHelper[placingCounter].coordinateds = [...ships[placingCounter].coordinateds, [c[0], c[1]]];
+                        updateShips([...shipHelper]);
+                        //se agrega una coordenada al arreglo
+                        //de coordenadas dentro de el objeto
+                        //del barco(ships)
+                    }
                 }
+
                 else if(obj.coordinateds.length === 1 && ((c[0] === obj.coordinateds[0][0] - 1)|| c[0] === obj.coordinateds[0][0] + 1) && c[1] === obj.coordinateds[0][1]){
+                    //este if nos permite posicionar el segundo elemento 
+                    //del barco, que solo se colorea si se clickea un espacio
+                    //adyacente al primer elemento del barco. si el bargo
+                    //posee una longitud de 1, no entra a este if
+
+                    //las instrucciones siguientes son idénticas
+                    //a las de el if de arriba
                     setMatrix([...matrix.slice(0, c[0]), [...matrix[c[0]].slice(0, c[1]), {...matrix[c[0]][c[1]], ship: true}, ...matrix[c[0]].slice(c[1]+1)], ...matrix.slice(c[0]+1)])
-                    //updateShips([...ships.slice(0, placingCounter),{...ships[placingCounter], coordinateds: [...ships[placingCounter].coordinateds, [c[0], c[1]]]},ships.slice(placingCounter + 1)])
                     shipHelper[placingCounter].coordinateds = [...ships[placingCounter].coordinateds, [c[0], c[1]]];
                     updateShips([...shipHelper]);
                 }
                 else if(obj.coordinateds.length === 2 && ((c[0] === obj.coordinateds[0][0] - 1 || c[0] === obj.coordinateds[0][0] + 1)||(c[0] === obj.coordinateds[1][0] - 1 || c[0] === obj.coordinateds[1][0] + 1) && c[1] === obj.coordinateds[0][1])){
+                    //este if nos permite posicionar el tercer elemento 
+                    //del barco, solo puede ser adyacente a uno de los elementos
+                    //del barco, y tiene que seguir la orientación horizontal del barco
+                    //para esto en el último && lógico, se comparan las coordenadas
+                    //verticales del segundo elemento y el tercer elemento 
                     setMatrix([...matrix.slice(0, c[0]), [...matrix[c[0]].slice(0, c[1]), {...matrix[c[0]][c[1]], ship: true}, ...matrix[c[0]].slice(c[1]+1)], ...matrix.slice(c[0]+1)]) 
-                    //updateShips([...ships.slice(0, placingCounter),{...ships[placingCounter], coordinateds: [...ships[placingCounter].coordinateds, [c[0], c[1]]]},ships.slice(placingCounter + 1)])
                     shipHelper[placingCounter].coordinateds = [...ships[placingCounter].coordinateds, [c[0], c[1]]];
                     updateShips([...shipHelper]);
                 }   
             }
+            //este else hace lo mismo que el if anterior(el que está
+            //en la misma jerarquía, solo que lo hace verticalmente 
             else if(obj.orientation === 'vertical' && obj.coordinateds.length < obj.len){
-                console.log("hola")
                 if(obj.coordinateds.length === 0){
-                    setMatrix([...matrix.slice(0, c[0]), [...matrix[c[0]].slice(0, c[1]), {...matrix[c[0]][c[1]], ship: true}, ...matrix[c[0]].slice(c[1]+1)], ...matrix.slice(c[0]+1)])
-                    shipHelper[placingCounter].coordinateds = [...ships[placingCounter].coordinateds, [c[0], c[1]]]
-                    updateShips([...shipHelper]);
-                    console.log("cayendo en el primer if")
+                    if(!((c[1] === 0 && matrix[c[0]][1].ship === true) || (c[1] === 9 && matrix[c[0]][8].ship === true) || ((c[1] === 0 || c[1] === 1)&& matrix[c[0]][2].ship === true) || ((c[1] === 9 || c[1] === 8)&& matrix[c[0]][7].ship === true))|| obj.len === 1){
+                        setMatrix([...matrix.slice(0, c[0]), [...matrix[c[0]].slice(0, c[1]), {...matrix[c[0]][c[1]], ship: true}, ...matrix[c[0]].slice(c[1]+1)], ...matrix.slice(c[0]+1)])
+                        shipHelper[placingCounter].coordinateds = [...ships[placingCounter].coordinateds, [c[0], c[1]]]
+                        updateShips([...shipHelper]);
+                    }
                 }
                 else if(obj.coordinateds.length === 1 && (c[1] === obj.coordinateds[0][1] - 1 || c[1] === obj.coordinateds[0][1] + 1)&& c[0] === obj.coordinateds[0][0]){
                     console.log("soy coordenadas", obj.coordinateds, c)
@@ -113,15 +144,18 @@ export function Board(){
         }
     }
     function restart(){
+        //se retoman los valores iniciales
+        //para volver a jugar
         setMatrix([...defaultMatrix]);
         setCounter(11);
         updatePlacingCounter(0);
-        updateShips([...shipsArray])
+        updateShips([...shipsArray]);
+        setShowShips(true);
     }
     useEffect(()=>{
         if(placingCounter > 4){
-            setPlacing(false)
-            setPlaying(true)
+            setPlacing(false);
+            setPlaying(true);
         }
     },[placingCounter])
     useEffect(()=>{
@@ -130,14 +164,9 @@ export function Board(){
             restart();
         }
     },[counter])
-/*     useEffect(()=>{
-        //si el juego vuelve a empezar, se reinicia la matrix
-        if(playing === true){            
-            setMatrix([...defaultMatrix]);
-            createAndRandomizeShips();
-        }
-    },[playing]) */
     useEffect(()=>{
+        //la variable placingCounter sirve para ir iterando 
+        //los distintos barcos
         if(ships[placingCounter].coordinateds && ships[placingCounter].coordinateds.length === ships[placingCounter].len){
             if(placingCounter === 4){
                 setPlacing(false);
