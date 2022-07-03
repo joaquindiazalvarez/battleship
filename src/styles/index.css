@@ -23,23 +23,27 @@ code {
   color: white;
   font-size: 30px;
 }
-
-#board .container{
+#game .container{
+  display:flex;
+}
+#game .container .board{
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#board div div{
+.placing{
+  flex-grow: 1;
+}
+#game div .board .rowsTags{
   /*first matrix map parent div*/
   display: block;
   line-height: 40px;
-  border: 1px solid black
 }
-#board div div div{
+#game div .board div div{
   /*second matrix map parent*/
   display: flex;
   line-height: 40px;
-  border: 1px solid black
 }
 .rowsTags{
   display:block;
@@ -79,6 +83,30 @@ code {
 img{
   border-radius: 30%;
 }
-#counter{
+#counter, #placingcounter{
+  color: white;
+}
+.placing{
+  height: 420px;
+  width: 420px;
+}
+#horizontal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#vertical{
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+.shipPart{
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  background: orange;
+  border-radius: 30%;
+}
+#placingMessage{
   color: white;
 }
