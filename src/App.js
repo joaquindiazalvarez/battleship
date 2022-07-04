@@ -1,14 +1,14 @@
 import './App.css';
 import { Footer } from './components/footer';
 import { Navbar } from './components/navbar';
-import { Board } from './components/board'
+import { Game } from './components/game'
 
 function App() {
   return (
     <div className="App">
       <div className="container-fluid position-fixed">
         <Navbar/>
-        <Board/>
+        <Game/>
         <Footer/>
       </div>
     </div>
