@@ -1,7 +1,7 @@
 ![plot](./battleship.png)
 ## The Game
-**this game is not finished, but works**
-you must place ships an then star to fire with clicks!
+### **this game is not finished, but works**
+you must place ships an then star to fire bot player with clicks!
 ## How to run app
 if you are using gitpod it will run automatically,
 however, if you are in VScode locally,
