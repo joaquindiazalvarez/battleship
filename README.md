@@ -4,8 +4,9 @@ you must place ships an then star to fire with clicks!
 ## How to run app
 if you are using gitpod it will run automatically,
 however, if you are in VScode locally,
+(you must have node and npm on your machine)
 first you must enter to the app folder:
-### `cd battleship`
+### `cd battleship-with-react`
 then you must install npm:
 ### `npm install`
 and then run it:
