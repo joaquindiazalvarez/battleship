@@ -1,8 +1,9 @@
 ![plot](./battleship.png)
 ## The Game
-### **this game is not finished, but works**
-you must place ships an then star to fire bot player with clicks!
-## How to run app
+you must place your ships an then start to hit the bot's board. Every time you hit the bot's board, you will get shoot randomly. The winner is te first player who sink all oponent's targets!
+## Technologies used
+For this project i used HTML, CSS, JS and React
+## How to run the app
 if you are using gitpod it will run automatically,
 however, if you are in VScode locally,
 (you must have node and npm on your machine)
